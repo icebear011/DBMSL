@@ -1,15 +1,8 @@
-SQL*Plus: Release 11.2.0.2.0 Production on Wed Jan 28 21:23:29 2026
-
-Copyright (c) 1982, 2014, Oracle.  All rights reserved.
-
 // CREATE USER 
 
 SQL> conn system
-Enter password:
-Connected.
-SQL> create user icebear identified by PASSWORD;
 
-User created.
+SQL> create user icebear identified by PASSWORD;
 
 SQL> grant connect, resource to icebear;
 
@@ -17,7 +10,6 @@ Grant succeeded.
 
 SQL> conn icebear
 Enter password:
-Connected.
 
 //CREATE TABLE st_info with attributes prn,name,m1,m2,m3
 
@@ -29,139 +21,35 @@ SQL> create table st_info (
   6    m3 number
   7  );
 
-Table created.
 
 SQL> select * from tab;
 
-TNAME                          TABTYPE  CLUSTERID
------------------------------- ------- ----------
-ST_INFO                        TABLE
-
-
 SQL> desc st_info;
- Name                                      Null?    Type
- ----------------------------------------- -------- ----------------------------
- PRN                                                NUMBER
- NAME                                               VARCHAR2(20)
- M1                                                 NUMBER
- M2                                                 NUMBER
- M3                                                 NUMBER
 
 SQL> insert into st_info values (101, 'Doraemon', 78, 85, 90);
 
-1 row created.
-
 SQL> insert into st_info values (102, 'Nobita',   45, 52, 60);
 
-1 row created.
-
-SQL> insert into st_info values (103, 'Shizuka',  88, 91, 86);
-
-1 row created.
-
-SQL> insert into st_info values (104, 'Gian',     62, 55, 58);
-
-1 row created.
-
-SQL> insert into st_info values (105, 'Suneo',    70, 68, 72);
-
-1 row created.
-
-SQL> insert into st_info values (106, 'Dorami',   92, 89, 94);
-
-1 row created.
-
-SQL> insert into st_info values (107, 'Nobisuke',   66, 73, 69);
-
-1 row created.
-
-SQL> insert into st_info values (108, 'Dekisugi', 95, 97, 96);
-
-1 row created.
-
-SQL> insert into st_info values (109, 'MiniDora', 80, 84, 82);
-
-1 row created.
-
-SQL> insert into st_info values (110, 'Tamako',   74, 78, 76);
-
-1 row created.
-
 SQL> set linesize 150
+
 SQL> select * from st_info;
-
-       PRN NAME                         M1         M2         M3
----------- -------------------- ---------- ---------- ----------
-       101 Doraemon                     78         85         90
-       102 Nobita                       45         52         60
-       103 Shizuka                      88         91         86
-       104 Gian                         62         55         58
-       105 Suneo                        70         68         72
-       106 Dorami                       92         89         94
-       107 Nobisuke                     66         73         69
-       108 Dekisugi                     95         97         96
-       109 MiniDora                     80         84         82
-       110 Tamako                       74         78         76
-
-10 rows selected.
-
-
 
 
 //Add attribute total and perc to the table
 
 SQL> alter table st_info add total number;
 
-Table altered.
-
 SQL> alter table st_info add percentage number;
-
-Table altered.
 
 
 //4)Calculate total & percentage
 
 SQL> update st_info set total=m1+m2+m3;
 
-10 rows updated.
-
-
 SQL> update st_info set percentage =total/3;
 
-10 rows updated.
-
-
-
 SQL> desc st_info;
- Name                                                                                Null?    Type
- ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
- PRN                                                                                          NUMBER
- NAME                                                                                         VARCHAR2(20)
- M1                                                                                           NUMBER
- M2                                                                                           NUMBER
- M3                                                                                           NUMBER
- TOTAL                                                                                        NUMBER
- PERCENTAGE                                                                                   NUMBER
-
+ 
 SQL> select * from st_info;
 
-       PRN NAME                         M1         M2         M3      TOTAL PERCENTAGE
----------- -------------------- ---------- ---------- ---------- ---------- ----------
-       101 Doraemon                     78         85         90        253 84.3333333
-       102 Nobita                       45         52         60        157 52.3333333
-       103 Shizuka                      88         91         86        265 88.3333333
-       104 Gian                         62         55         58        175 58.3333333
-       105 Suneo                        70         68         72        210         70
-       106 Dorami                       92         89         94        275 91.6666667
-       107 Nobisuke                     66         73         69        208 69.3333333
-       108 Dekisugi                     95         97         96        288         96
-       109 MiniDora                     80         84         82        246         82
-       110 Tamako                       74         78         76        228         76
-
-10 rows selected.
-
 SQL> commit;
-
-Commit complete.
-
-SQL>
