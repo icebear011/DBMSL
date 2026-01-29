@@ -47,3 +47,74 @@ SQL> insert into course(course_id,title,dept_id,credits) values ('CS-001','Weekl
 SQL> desc section;
 
 SQL> insert into section(Section_id,course_id,sec_id,semester,year) values(8,'CS-001',1,'FALL',2017);
+
+
+
+
+
+
+
+
+
+
+
+//CREATE A SEQUENCE
+//can start with 0 , but not negative
+create sequence emp_seq start with 1 increment by 1;  
+
+//CREATE TABLE:
+create table emp(emp_id int primary key , name varchar2(50),mobile int);
+desc emp;
+insert into emp(emp_id, name, mobile) values (emp_seq.nextval, 'aX9Qp', 8734926105);
+insert into emp(emp_id, name, mobile) values (emp_seq.nextval, 'Z7mL2', 9046182739);
+insert into emp(emp_id, name, mobile) values (emp_seq.nextval, 'qR8Tn', 8897345612);
+insert into emp(emp_id, name, mobile) values (emp_seq.nextval, 'M2xA9', 9165027843);
+insert into emp(emp_id, name, mobile) values (emp_seq.nextval, 'B7KpQ', 8729456108);
+
+select * from emp;
+
+//the max value of the emp_id made by sequence or general in table
+select max(emp_id) from emp; 
+
+// delete sequence
+drop sequence emp_seq; 
+
+ // sequence doesn't exist
+insert into emp(emp_id,name,mobile) values (emp_seq.nextval,'xy9z',8784649887); 
+
+//table remain unchanged
+select * from emp; 
+
+ 
+//NEW SEQUENCE
+create sequence emp1_s start with 6 increment by 1;
+insert into emp(emp_id, name, mobile) values (emp1_s.nextval, 'Kp7XQ', 9127834560);
+insert into emp(emp_id, name, mobile) values (emp1_s.nextval, 'M9aT2', 9876043219);
+insert into emp(emp_id, name, mobile) values (emp1_s.nextval, 'R4ZxL', 9012783456);
+insert into emp(emp_id, name, mobile) values (emp1_s.nextval, 'QW8nB', 9345601278);
+insert into emp(emp_id, name, mobile) values (emp1_s.nextval, 'X2VmK', 9567812304);
+
+select * from emp;
+select max(emp_id) from emp;
+
+//RENAME TABLE NAME 
+to rename the table: rename emp to employee;
+
+//RENAME FIELD NAME
+to rename the field: alter table employee rename column mobile to mobileno;
+
+//ADD A NEW COLUMN PINCODE WITH NOT NULL;
+alter table employee add PINCODE INT;
+truncate table employee;
+alter table employee modify PINCODE INT NOT NULL;
+desc employee;
+
+insert into employee values (emp1_s.nextval, 'A9xQ', 9123487654, 301201);
+insert into employee values (emp1_s.nextval, 'Lm72', 9876501234, 301202);
+insert into employee values (emp1_s.nextval, 'QpX8', 9345678123, 301203);
+insert into employee values (emp1_s.nextval, 'Z7N4', 9567812345, 301204);
+insert into employee values (emp1_s.nextval, 'B2mK', 9012349876, 301205);
+insert into employee values (emp1_s.nextval, 'R8TQ', 8899123456, 301206);
+
+
+
