@@ -18,167 +18,32 @@ h. Create a new course "CS-001", titled "Weekly Seminar", with 1 credits.
 
 
 
-
-
-SQL*Plus: Release 11.2.0.2.0 Production on Wed Jan 28 23:54:05 2026
-
-Copyright (c) 1982, 2014, Oracle.  All rights reserved.
-
-SQL> CONN icebear
-Enter password:
-Connected.
 SQL> select * from tab;
-
-TNAME                          TABTYPE  CLUSTERID
------------------------------- ------- ----------
-CLASSROOM                      TABLE
-COURSE                         TABLE
-DEPARTMENT                     TABLE
-INSTRUCTOR                     TABLE
-SECTION                        TABLE
-STUDENT                        TABLE
-ST_INFO                        TABLE
-TAKES                          TABLE
-TEACHES                        TABLE
-TIME_SLOT                      TABLE
-UNIVERSITY                     TABLE
-
-11 rows selected.
-
-SQL> desc department;
- Name                                      Null?    Type
- ----------------------------------------- -------- ----------------------------
- DEPT_ID                                   NOT NULL NUMBER(38)
- NAME                                      NOT NULL VARCHAR2(50)
- BUILDING                                           VARCHAR2(50)
- BUDGET                                             NUMBER(12,2)
- UNIVERSITY_ID                                      NUMBER(38)
-
 
 SQL> set linesize 150
         
 SQL> alter table department modify name varchar2(30);
-
-Table altered.
-                                                                            
+                                                                          
 SQL> ALTER TABLE DEPARTMENT modify building varchar2(30);
-
-Table altered.
 
 SQL> alter table department modify building varchar2(30) not null;
 
-Table altered.
-
 SQL> desc department;
- Name                                                                                Null?    Type
- ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
- DEPT_ID                                                                             NOT NULL NUMBER(38)
- NAME                                                                                NOT NULL VARCHAR2(30)
- BUILDING                                                                            NOT NULL VARCHAR2(30)
- BUDGET                                                                                       NUMBER(12,2)
- UNIVERSITY_ID                                                                                NUMBER(38)
-
-SQL> select * from department;
-
-   DEPT_ID NAME                           BUILDING                           BUDGET UNIVERSITY_ID
----------- ------------------------------ ------------------------------ ---------- -------------
-         1 Computer Science               Taylor                             100000             1
-         2 Mathematics                    Watson                              90000             1
-         3 Physics                        Newton                              95000             1
-         4 Biology                        Darwin                              85000             1
-         5 Chemistry                      Curie                               92000             1
-         6 English                        Shakespeare                         80000             1
-         7 History                        Roosevelt                           78000             1
-
-7 rows selected.
 
 SQL> select * from instructor;
-
-INSTRUCTOR_ID NAME                                                  DEPT_ID I     SALARY
-------------- -------------------------------------------------- ---------- - ----------
-            1 John Doe                                                    1 Y      80000
-            2 Jane Smith                                                  1 N      75000
-            3 Bob Johnson                                                 2 Y      82000
-            4 Alice Brown                                                 2 N      76000
-            5 Charlie Davis                                               3 Y      81000
-            6 Eva Wilson                                                  3 N      77000
-            7 Frank Miller                                                4 Y      79000
-
-7 rows selected.
 
 SQL>  update instructor set salary = salary + salary *.1 where dept_id = (select dept_id from department where name = 'Computer Science');
 
-2 rows updated.
-
-
 SQL> update instructor set salary=salary+salary * 5/100 where salary<80000;
-
-3 rows updated.
 
 SQL>  update instructor set salary=salary-salary *5/100 where salary>80000 and salary<85000;
 
-5 rows updated.
-
 SQL> select * from instructor;
-
-INSTRUCTOR_ID NAME                                                  DEPT_ID I     SALARY
-------------- -------------------------------------------------- ---------- - ----------
-            1 John Doe                                                    1 Y      88000
-            2 Jane Smith                                                  1 N      78375
-            3 Bob Johnson                                                 2 Y      77900
-            4 Alice Brown                                                 2 N      79800
-            5 Charlie Davis                                               3 Y      76950
-            6 Eva Wilson                                                  3 N    76807.5
-            7 Frank Miller                                                4 Y    78802.5
-
-7 rows selected.
 
 SQL> select * from course;
 
-COURSE_I TITLE                                                                                                   DEPT_ID    CREDITS
--------- ---------------------------------------------------------------------------------------------------- ---------- ----------
-CS-101   Introduction to Programming                                                                                   1          3
-CS-201   Data Structures                                                                                               1          4
-MATH-101 Calculus I                                                                                                    2          4
-MATH-201 Linear Algebra                                                                                                2          3
-PHY-101  Mechanics                                                                                                     3          4
-PHY-201  Quantum Physics                                                                                               3          4
-BIO-101  Introduction to Biology                                                                                       4          4
-
-7 rows selected.
-
 SQL> insert into course(course_id,title,dept_id,credits) values ('CS-001','Weekly Seminar',1,1);
 
-1 row created.
-
 SQL> desc section;
- Name                                                                                Null?    Type
- ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
- SECTION_ID                                                                          NOT NULL NUMBER(38)
- COURSE_ID                                                                                    VARCHAR2(8)
- SEC_ID                                                                                       NUMBER(38)
- SEMESTER                                                                                     VARCHAR2(6)
- YEAR                                                                                         NUMBER(38)
- BUILDING                                                                                     VARCHAR2(50)
- ROOM_NUMBER                                                                                  VARCHAR2(10)
- TIME_SLOT_ID                                                                                 VARCHAR2(4)
-
-SQL> select * from section;
-
-SECTION_ID COURSE_I     SEC_ID SEMEST       YEAR BUILDING                                           ROOM_NUMBE TIME
----------- -------- ---------- ------ ---------- -------------------------------------------------- ---------- ----
-         1 CS-101            1 Fall         2023 Taylor                                             3128       A
-         2 CS-201            1 Spring       2024 Taylor                                             3114       B
-         3 MATH-101          1 Fall         2023 Watson                                             2230       C
-         4 MATH-201          1 Spring       2024 Watson                                             2245       D
-         5 PHY-101           1 Fall         2023 Newton                                             1320       E
-         6 PHY-201           1 Spring       2024 Newton                                             1310       F
-         7 BIO-101           1 Fall         2023 Darwin                                             2110       G
-
-7 rows selected.
 
 SQL> insert into section(Section_id,course_id,sec_id,semester,year) values(8,'CS-001',1,'FALL',2017);
-
-1 row created.
-
-SQL>
