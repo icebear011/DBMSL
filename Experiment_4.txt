@@ -1,0 +1,48 @@
+a) all employee names that starts with "a" and are at least 3 characters in length
+
+select first_name,last_name
+from emp6 
+where lower(first_name) like 'a%' and length(first_name) >=3;
+
+b)  departments having Dollas, New York and Chicago locations.
+
+select * from departments 
+where lower(location)='dallas' or lower(location)='new york' or lower(location)='chicago';
+
+c) names of employees who are working as clerk, salesman or analyst and drawing a salary more than 3000.
+
+select first_name , job , salary 
+from emp6 
+where lower(job) 
+IN ('clerk','salesman','analyst') and salary>=3000;
+
+d)the names of employees who are not working as managers.
+
+select first_name,job 
+from emp6 
+where lower(job)!='manager'
+
+e)  name of emp who earns highest salary.
+
+select first_name 
+from emp6 
+where salary=(select max(salary) from emp6);
+
+f) employee number and name of employee working as CLERK and earning highest salary among clerks
+
+select emp_no,first_name 
+from emp6 
+where lower(job)='clerk' and salary=(select max(salary) from emp6 where lower(job)='clerk');
+
+g) the names of clerks who earn salary more than that of bob of that of sal lesser  than that of james
+
+select first_name 
+from emp6 
+where lower(job)='clerk' and salary > (select salary from emp6 where lower(first_name)='bob') and salary < (select salary from emp6 where lower(first_name)='james');
+
+h) Display the names of the employees who earn highest salary in their respective departments
+
+select e.first_name,e.salary,e.deptno 
+from emp6 e 
+where e.salary=(select max(salary)from emp6 where deptno=e.deptno);
+
