@@ -1,0 +1,95 @@
+select * from instructor where dept_id=(select dept_id from department where name ='Computer Science');
+
+
+insert into instructor values(8,'xyz',1,'N',55000);
+
+select i.instructor_id,i.Name,i.salary,d.name from instructor i join department d on i.dept_id=d.dept_id where d.name='Computer Science';
+
+average salary of instructors in the Computer Science department.
+
+select d.name, avg(salary) as AVG_SAL from instructor i join department d on i.dept_id=d.dept_id where d.name='Computer Science' group by d.name;
+
+
+average salary in each department.
+
+select d.name,avg(i.salary)as AVG_SAL from department d join instructor i on d.dept_id=i.dept_id group by d.name;
+
+
+
+total salary of all teachers earning more than 30K
+
+select sum(salary)as total_sal from instructor where salary > 30000;
+
+
+number of students enrolled in each course
+
+select c.course_id,c.title, count(e.student_id) as enrolled_students from course c left join section s on c.course_id=s.course_id left join enrollment e on s.section_id=e.section_id group by c.course_id, c.title order by c.course_id;
+
+
+select * from department where name ='Computer Science';
+select * from department where lower(name) like 'computer Science';
+select * from department where lower(name) like '%science%';
+select * from department where lower(name) like '%sci%';
+select * from department where name= 'Computer Science';
+
+
+
+calculate length of the names of students
+
+select  length(name) from student;
+
+calculate total no of instructors
+
+select count(name) from instructor;
+
+
+alter table instructor add hiredate date;
+
+update instructor set hiredate = date '2021-06-30' where instructor_id=1;
+update instructor set hiredate = date '2023-01-02' where instructor_id=2;
+update instructor set hiredate = date '2024-01-17' where instructor_id=3;
+update instructor set hiredate = date '2025-01-04' where instructor_id=4;
+update instructor set hiredate = date '2026-05-02' where instructor_id=5;
+update instructor set hiredate = date '2025-12-31' where instructor_id=6;
+update instructor set hiredate = date '2020-01-01' where instructor_id=7;
+
+
+select * from instructor where hiredate > add_months(sysdate, -60);
+
+Display the list of instructor who have joined after 1 jan 2021 or before 30 jun 2022
+
+select * from instructor where hiredate > date '2021-01-01' and hiredate < date '2022-06-30';
+
+Display name of instructor who are going to retire 01 jan 2024 if the maximum job period is 3 years
+
+select * from instructor where hiredate > date '2021-01-01' and hiredate < add_months(sysdate, -36);
+
+Display  instructor whose salary contains at least 4 digits and salary above 75 thousand.
+
+select name, salary from instructor where salary >= 75000 and length(salary) >= 4;
+
+Print a list of instructors displaying ‘Less Salary’ if less than 60000 if exactly 60000 display as ‘Exact Salary’ and if greater than 60000 display ‘More Salary’.
+select name, salary,
+       case
+           when salary < 60000 then 'Less Salary'
+           when salary = 60000 then 'Exact Salary'
+           when salary > 60000 then 'More Salary'
+       end as salary_status
+from instructor;
+
+Display names of all the instructors concatenated with their department names.
+select i.name || '=>' || d.name from instructor i join  department d on i.dept_id=d.dept_id;
+
+
+
+select d.name,count(i.name) from instructor i join department d on i.dept_id=d.dept_id group by d.name;
+
+
+
+update instructor set salary = 70000 where name='Frank Miller';
+
+
+select i.name,  i.salary from instructor i where i.salary>=(select i2.salary from instructor i2 join department d on i2.dept_id = d.dept_id where d.name='Biology');
+
+
+ 
