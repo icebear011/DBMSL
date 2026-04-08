@@ -1,0 +1,87 @@
+create or replace procedure to_month
+
+as
+
+v_month varchar2(5);
+
+begin
+
+v_month: to_char(sysdate, 'MON');
+
+dbms_output.put_line('the current month is || v_month);
+
+end;
+
+/
+
+create or replace procedure to month
+
+as
+
+v_month varchar2(10);
+
+begin
+
+v month: to char(sysdate, MONTH);
+
+end;
+
+### day is display only 3 char 1.e. tue, mon etc
+
+create or replace procedure to_DAY
+
+as
+
+v_day varchar2(10);
+
+begin
+
+v_day: to_char(sysdate, 'dy');
+
+dbms_output.put_line('the current month is || v_day);
+
+end;
+
+design a trigger such that no insertion or updation is done on sat or sun (for practice you create trigger for wed)
+
+dbms_output.put_line('the current month is || v_month);
+
+end;
+
+/
+
+#### complete day is display like monday, tuesday, etc
+
+create or replace procedure to_DAY
+
+as
+
+v_day varchar2(10);
+
+begin
+
+v_day := to_char(sysdate, 'day');
+
+dbms_output.put_line('the current month is || v_day);
+
+end;
+
+/
+
+### day is display only 3 cha
+
+create or replace procedure to_DAY
+
+as
+
+v_day varchar2(10);
+
+begin
+
+v_day := to_char(sysdate, 'dy');
+
+dbms_output.put_line('the current month is || v_day);
+
+end;
+
+/
