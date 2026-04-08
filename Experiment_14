@@ -1,0 +1,58 @@
+
+
+
+
+1. Create table enp? with attributes espne as integer type, name as string and catagory as interger type:-
+
+
+CREATE TABLE emp (
+    empno NUMBER,
+    name VARCHAR2(50),
+    category NUMBER
+);
+
+
+
+2. Design trigger such that string values should be inserted or updated as uppercase only example string upper (string):-
+
+
+CREATE OR REPLACE TRIGGER trg_uppercase
+BEFORE INSERT OR UPDATE ON emp
+FOR EACH ROW
+BEGIN
+    :NEW.name := UPPER(:NEW.name);
+END;
+/
+
+
+
+3. Add new attribute salary with proper datatype to the above table:-
+
+
+ALTER TABLE emp
+ADD salary NUMBER;
+
+
+
+4. Desigh a trigger which will be fired when a new record is inserted or update for the following conditions: 
+a. salary should be more than 10000 for category 1
+b. salary should be more than 20000 focategory 2
+c. salary should be more than 3000 for category 3 :-
+
+
+CREATE OR REPLACE TRIGGER trg_salary_check
+BEFORE INSERT OR UPDATE ON emp
+FOR EACH ROW
+BEGIN
+    IF :NEW.category = 1 AND :NEW.salary <= 10000 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Salary must be > 10000 for category 1');
+
+    ELSIF :NEW.category = 2 AND :NEW.salary <= 28000 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Salary must be > 20000 for category 2');
+
+    ELSIF :NEW.category = 3 AND :NEW.salary <= 10000 THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Salary must be > 10000 for category 3');
+    END IF;
+END;
+/
+
