@@ -1,0 +1,29 @@
+CREATE TABLE emp (
+    emp_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    dept_no NUMBER,
+    salary NUMBER
+);
+
+
+CREATE TABLE sal_mod (
+    empno NUMBER,
+    deptno NUMBER,
+    old_sal NUMBER,
+    mod_date DATE
+);
+
+
+CREATE OR REPLACE TRIGGER trg_salary_update
+AFTER UPDATE OF salary ON emp
+FOR EACH ROW
+BEGIN
+    INSERT INTO sal_mod (empno, deptno, old_sal, mod_date)
+    VALUES (
+        :OLD.emp_id,
+        :OLD.dept_no,
+        :OLD.salary,
+        SYSDATE
+    );
+END;
+/
