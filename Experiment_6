@@ -1,17 +1,6 @@
-Experiment No. 6
 
-Aim:  To study PL/SQL Procedure and write procedures for:
-i.	Swapping of two numbers without using third variable,
-ii.	Largest amongst three numbers.
-iii.	Area of circle by radius as an argument.
-
-Solution:
 
 1. Swapping Two Numbers Without Using a Third Variable Procedure Creation:
-
-Create the Stored Procedure
-Create the stored procedure by entering the PL/SQL code directly in the SQLPlus CLI.:
-
 
 
 CREATE OR REPLACE PROCEDURE SwapNumbers (
@@ -42,20 +31,10 @@ END;
 /
 
 
-Enable Output in SQLPlus, before you can see the output of DBMS_OUTPUT.PUT_LINE, you need to enable the server output in SQLPlus
-SET SERVEROUTPUT ON
-
-Call the procedure directly in SQLPlus or a similar tool:
-
-
 
 EXEC SwapNumbers(10, 20);
 
 
-Explanation:
-•	The procedure is called within an anonymous PL/SQL block.
-•	The variables a and b are passed as IN OUT parameters, meaning their values are modified by the procedure.
-•	DBMS_OUTPUT.PUT_LINE is used to print the output.
 
 
 
@@ -97,11 +76,6 @@ END;
 
 
 
-Explanation:
-•	maxVal is used as an OUT parameter to receive the largest number.
-•	The procedure is called, and the result is displayed using DBMS_OUTPUT.PUT_LINE.
- 
-
 
 3. Calculating the Area of a Circle Given the Radius Procedure Creation:
 
@@ -116,7 +90,6 @@ END;
 /
 
 
-Execution Example:
 
 
 DECLARE
@@ -127,17 +100,6 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Area of Circle: ' || areaCircle);
 END;
 /
-
-
-Explanation:
-•	The radius (r) is passed to the procedure, and the calculated area is returned in areaCircle.
-•	The procedure is called, and the area of the circle is printed.
-
-Outcome:
-
-    Procedure Creation Queries: These queries define the PL/SQL procedures (SwapNumbers, FindLargest, and CalculateArea) that perform the required operations.
-
-    Execution Queries: These anonymous PL/SQL blocks demonstrate how to call each procedure, passing in appropriate values and printing the results using DBMS_OUTPUT.PUT_LINE.
 
 
 
@@ -219,10 +181,7 @@ end;
 
 
 
-
-set serveroutput ON
-
--> Create procedure Hello1
+Create procedure Hello1
 as
 Begin
 DBMS_OUTPUT.PUT_line('Hello World');
