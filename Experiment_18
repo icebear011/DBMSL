@@ -1,0 +1,39 @@
+CREATE TABLE emp (
+    emp_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    dept_no NUMBER,
+    salary NUMBER
+);
+
+
+CREATE TABLE audit_emp (
+    emp_id NUMBER,
+    name VARCHAR2(50),
+    dept_no NUMBER,
+    salary NUMBER,
+    operation VARCHAR2(10)
+);
+
+
+
+CREATE OR REPLACE TRIGGER trg_audit_emp
+AFTER INSERT OR UPDATE OR DELETE ON emp
+FOR EACH ROW
+BEGIN
+    -- INSERT Operation
+    IF INSERTING THEN
+        INSERT INTO audit_emp
+        VALUES (:NEW.emp_id, :NEW.name, :NEW.dept_no, :NEW.salary, 'INSERT');
+
+    -- UPDATE Operation
+    ELSIF UPDATING THEN
+        INSERT INTO audit_emp
+        VALUES (:NEW.emp_id, :NEW.name, :NEW.dept_no, :NEW.salary, 'UPDATE');
+
+    -- DELETE Operation
+    ELSIF DELETING THEN
+        INSERT INTO audit_emp
+        VALUES (:OLD.emp_id, :OLD.name, :OLD.dept_no, :OLD.salary, 'DELETE');
+    END IF;
+END;
+/
