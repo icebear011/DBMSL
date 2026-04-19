@@ -1,10 +1,7 @@
 Experiment No. 5 
 
-Aim:  To study and execute different joins in SQL.
 
-Solution:
-We’ll create sample tables for practice first then understand the working of joins in SQL.
-Tables Required
+
 1.	Employees (emp_id, emp_name, dept_id, salary, manager_id)
 2.	Departments (dept_id, dept_name, location)
 3.	Projects (proj_id, proj_name, dept_id)
@@ -130,6 +127,8 @@ Exercises:
     SELECT e.emp_name AS Employee, m.emp_name AS Manager 
     FROM Employees e 
     LEFT JOIN Employees m ON e.manager_id = m.emp_id;
+
+
 6. CROSS JOIN
     Objective: Generate a report showing all possible pairs of employees and projects (regardless of assignment).
     
@@ -138,11 +137,4 @@ FROM Employees e
 CROSS JOIN Projects p;
 
 
-Outcome:
-1.	Understanding how INNER JOIN retrieves records with matching values in both tables.
-2.	Learn how LEFT JOIN returns all records from the left table and the matched records from the right table, with NULL for non-matching rows.
-3.	Understand RIGHT JOIN and its use in retrieving all records from the right table with NULL for non-matching rows on the left.
-4.	Learn to use FULL OUTER JOIN to return all records when there is a match in either left or right table.
-5.	Understand how to use SELF JOIN to relate rows within the same table, useful for hierarchical data.
-6.	Learn the use of CROSS JOIN to create a Cartesian product, combining all rows from two tables.
 
